@@ -9,6 +9,6 @@
 </head>
 <body>
 <h1>Hello World!</h1>
-<% response.sendRedirect("main/users"); %>
+<% response.sendRedirect("main/webm"); %>
 </body>
 </html>

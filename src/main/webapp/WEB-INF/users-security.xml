@@ -10,7 +10,7 @@
        ">
     <http auto-config="true" use-expressions="false">
      <!--   <form-login login-processing-url="/static/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t"/>-->
-    <intercept-url pattern="/**" access="ROLE_ADMIN"/>
+<!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
 </http>
     <authentication-manager>
         <authentication-provider>

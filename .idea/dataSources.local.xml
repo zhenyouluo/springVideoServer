@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - yourwebm@localhost" uuid="92cfd07c-0730-45e3-b2bf-791531c1d234">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>yourwebm.*</schema-pattern>
+      <default-schemas>yourwebm.*</default-schemas>
+    </data-source>
+  </component>
+</project>

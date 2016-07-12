@@ -1,7 +1,9 @@
 package com.khudim.controllers;
 
 import com.khudim.main.Users;
+import com.khudim.main.Webm;
 import com.khudim.services.UserService;
+import com.khudim.services.WebmService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +25,30 @@ public class MainController {
     @Resource(name = "userService")
     private UserService userService;
 
+    @Resource(name = "webmService")
+    private WebmService webmService;
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsers(Model model) {
         logger.debug("Received request to show all persons");
 
         List<Users> users = userService.getAll();
-
+        List<Webm> webms = webmService.getAll();
         model.addAttribute("users", users);
+        model.addAttribute("webms", webms);
 
-        return "userspage";
+        return "usersPage";
     }
+    @RequestMapping(value = "/webm", method = RequestMethod.GET)
+    public String getWebms(Model model) {
+        logger.debug("Received request to show all webms");
+
+        List<Webm> webms = webmService.getAll();
+
+        model.addAttribute("webms", webms);
+        return "webmPage";
+    }
+
 
     @RequestMapping(value = "/users/add", method = RequestMethod.GET)
     public String getAdd(Model model) {

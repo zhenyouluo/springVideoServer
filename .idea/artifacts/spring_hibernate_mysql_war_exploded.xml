@@ -1,22 +1,17 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="spring-hibernate-mysql:war exploded">
-    <output-path>$PROJECT_DIR$/target/spring-hibernate-mysql</output-path>
+    <output-path>$PROJECT_DIR$/target/spring-hibernate-mysql-1.0.0-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="spring-hibernate-mysql" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: junit:junit:4.8.1" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.0.5.RELEASE" />
-          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-asm:3.0.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.0.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.0.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-web:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.0.5.RELEASE" />
@@ -31,6 +26,9 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:3.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: javassist:javassist:3.12.1.GA" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.1" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.14" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.1" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
@@ -52,10 +50,14 @@
           <element id="library" level="project" name="Maven: org.hibernate:ejb3-persistence:1.0.2.GA" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-commons-annotations:3.1.0.GA" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.14" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:3.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.0.5.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/spring-hibernate-mysql/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/spring-hibernate-mysql-1.0.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="spring-hibernate-mysql/web/Web" />
     </root>

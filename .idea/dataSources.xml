@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2020734801">
+    <data-source source="LOCAL" name="MySQL - yourwebm@localhost" uuid="92cfd07c-0730-45e3-b2bf-791531c1d234">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/yourwebm</jdbc-url>
+      <vm-options>max_allowed_packet</vm-options>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+        <property name="maxAllowedPacket" value="161616" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+  </component>
+</project>
