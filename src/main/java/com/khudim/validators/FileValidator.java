@@ -1,6 +1,7 @@
 package com.khudim.validators;
 
-import com.khudim.services.File;
+import com.khudim.users.File;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -8,7 +9,7 @@ import org.springframework.validation.Validator;
 
 
 
-
+@Component
 public class FileValidator implements Validator {
     public boolean supports(Class<?> paramClass) {
         return File.class.equals(paramClass);

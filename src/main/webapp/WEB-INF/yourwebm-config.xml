@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <import resource="data-source.xml"/>
+    <import resource="liquibase-spring.xml"/>
+    <import resource="server-config.xml"/>
+    <context:annotation-config/>
+    <bean id="fileValidator" class="com.khudim.validators.FileValidator" />
+    <bean id="application" class="com.khudim.server.YourWebmServer"/>
+    <bean id="userService" class="com.khudim.users.UserService"/>
+    <bean id="userRepository" class="com.khudim.users.UserRepository"/>
+    <bean id="webmService" class="com.khudim.webm.WebmService"/>
+    <bean id="webmRepository" class="com.khudim.webm.WebmRepository"/>
+    <bean id="fileScanner" class="com.khudim.scanner.FileScanner">
+        <constructor-arg name="webmService" ref="webmService"/>
+            </bean>
+</beans>

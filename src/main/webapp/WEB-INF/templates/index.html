@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>hud</title>
+    <link rel="apple-touch-icon" href="static/resources/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+
+    <link rel="stylesheet" href="static/resources/styles/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/resources/scripts/vendor/modernizr.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a th:href="@{~/login}">Login</a></li>
+        </ul>
+        <h3 class="text-muted">webm stuff</h3>
+    </div>
+
+    <div class="content-box">
+
+        <div class="row">
+            <th:block th:each="webm : ${webms}" var="webms">
+                <a th:href value="${webm.image}" var="picture_url"/>
+                <a th:href value="${webm.path}" var="webm_url"/>
+                <a th:href=@{/video/{webmName}(webmName=${webm.name})}>ee</a>
+                <div class="col-md-3 col-sm-4 col-xs-12 video-col">
+                    <div class="thumbnail">
+                        <img th:href="${picture_url}" alt="">
+                        <div class="caption">
+                            <h3></h3>
+                            <p>Ipsum dignissimos minus cumquedistinctio sit? Dolore adipisci cum veniam?</p>
+                            <p><a th:href="@{/video/{webmName}(webmName=${webm.name})}" class="btn btn-primary btn-play"
+                                  role="button">
+                                <span
+                                        class="glyphicon glyphicon-play" aria-hidden="true">
+                                </span>
+                            </a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                            </thdiv>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+
+        <nav class="pagination-wrap">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="footer">
+        <p>♥ Webm stuff</p>
+    </div>
+
+    <div class="video-src-container video-src-hidden">
+        <video id="video-src" class="video-src" src="" loop="" autoplay="" controls=""></video>
+    </div>
+    <div class="video-switch-controls">
+        <a href="#0" class="video-switch-control video-src-prev" role="button">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a href="#0" class="video-switch-control video-src-next" role="button">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+
+
+<script src="static/resources/scripts/vendor.js"></script>
+
+<script src="static/resources/scripts/plugins.js"></script>
+
+<script src="static/resources/scripts/main.js"></script>
+
+
+</body>
+</html>

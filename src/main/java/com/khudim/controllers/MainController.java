@@ -1,26 +1,26 @@
 package com.khudim.controllers;
 
-import com.khudim.main.Users;
-import com.khudim.main.Webm;
-import com.khudim.services.UserService;
-import com.khudim.services.WebmService;
+import com.khudim.users.User;
+import com.khudim.users.UserService;
+import com.khudim.webm.Webm;
+import com.khudim.webm.WebmService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainController {
 
-    protected static Logger logger = Logger.getLogger("controller");
+    private static Logger logger = Logger.getLogger("controller");
 
     @Resource(name = "userService")
     private UserService userService;
@@ -31,69 +31,46 @@ public class MainController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsers(Model model) {
         logger.debug("Received request to show all persons");
-
-        List<Users> users = userService.getAll();
-        List<Webm> webms = webmService.getAll();
+        List<User> users = userService.getAll();
         model.addAttribute("users", users);
-        model.addAttribute("webms", webms);
-
         return "usersPage";
     }
-    @RequestMapping(value = "/webm", method = RequestMethod.GET)
-    public String getWebms(Model model) {
-        logger.debug("Received request to show all webms");
-
-        List<Webm> webms = webmService.getAll();
-
-        model.addAttribute("webms", webms);
-        return "webmPage";
+    @RequestMapping(value = "/video/{webmName}",method = RequestMethod.GET)
+    public String getVideo(@PathVariable String webmName, HttpServletResponse response) throws IOException {
+        OutputStream oos = response.getOutputStream();
+        byte[] buf = new byte[8192];
+        int c;
+        try(FileInputStream inputStream = new FileInputStream(webmService.getWebmPath(webmName+".webm").toFile())){
+            response.setContentType("audio/webm");
+            response.setContentLength(inputStream.available());
+            while ((c = inputStream.read(buf, 0, buf.length)) > 0) {
+                oos.write(buf, 0, c);
+                oos.flush();
+            }
+        }
+        return "index";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getWebms(Model model) {
+        logger.debug("Received request to show all webms");
+        List<Webm> webms = webmService.getAll();
+        model.addAttribute("webms", webms);
+        return "index";
+    }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.GET)
     public String getAdd(Model model) {
         logger.debug("Adding new User");
-
-        model.addAttribute("userAttribute", new Users());
-
+        model.addAttribute("userAttribute", new User());
         return "addPage";
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute("userAttribute") Users users) {
-        logger.debug("Received request to add new Users");
-
+    public String add(@ModelAttribute("userAttribute") User users) {
+        logger.debug("Received request to add new User");
         userService.add(users);
-
         return "addedPage";
     }
-
-    @RequestMapping(value = "/users/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id", required = true) int id, Model model) {
-        logger.debug("Received request to delete existing person");
-        userService.delete(id);
-        model.addAttribute("id", id);
-
-        return "deletedpage";
-    }
-
-    @RequestMapping(value = "/users/edit", method = RequestMethod.GET)
-    public String getEdit(@RequestParam(value = "id", required = true) int id, Model model) {
-        logger.debug("Received request to edit existing person");
-        model.addAttribute("userAttribute", userService.get(id));
-        return "editPage";
-    }
-
-    @RequestMapping(value = "/users/edit", method = RequestMethod.POST)
-    public String saveEdit(@ModelAttribute("userAttribute")
-                           Users users, @RequestParam(value = "id", required = true) int id, Model model) {
-
-        users.setId(id);
-        userService.edit(users);
-        model.addAttribute("id", id);
-        return "editedPage";
-
-    }
-
-
+    
 }

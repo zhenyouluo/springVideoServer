@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ==================================================
+                         Jetty config
+    ================================================== -->
+
+    <bean id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
+        <property name="keyStorePath" value="file:src/main/webapp/WEB-INF/keystore"/>
+        <property name="keyStorePassword" value="OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4"/>
+        <property name="keyManagerPassword" value="OBF:1u2u1wml1z7s1z7a1wnl1u2g"/>
+        <property name="trustStorePath" value="file:src/main/webapp/WEB-INF/keystore"/>
+        <property name="trustStorePassword" value="OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4"/>
+        <property name="endpointIdentificationAlgorithm" value=""/>
+    </bean>
+
+
+    <bean id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+        <property name="secureScheme" value="https"/>
+        <property name="securePort" value="8443"/>
+        <property name="outputBufferSize" value="32768"/>
+        <property name="requestHeaderSize" value="8192"/>
+        <property name="responseHeaderSize" value="8192"/>
+        <property name="sendServerVersion" value="true"/>
+        <property name="sendDateHeader" value="false"/>
+  <!--      <property name="headerCacheSize" value="512"/>
+        <property name="sendXPoweredBy" value="true"/>-->
+    </bean>
+
+    <bean id="sslHttpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+        <constructor-arg ref="httpConfig"/>
+        <property name="customizers">
+            <list>
+                <bean class="org.eclipse.jetty.server.SecureRequestCustomizer">
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="server" class="org.eclipse.jetty.server.Server">
+        <constructor-arg>
+            <bean class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+                <property name="minThreads" value="10"/>
+                <property name="maxThreads" value="100"/>
+            </bean>
+        </constructor-arg>
+        <property name="connectors">
+            <list>
+                <bean id="connector" class="org.eclipse.jetty.server.ServerConnector">
+                    <constructor-arg ref="server"/>
+                    <property name="host" value="0.0.0.0"/>
+                    <property name="port" value="8090"/>
+                    <property name="idleTimeout" value="30000"/>
+                    <property name="connectionFactories">
+                        <list>
+                            <bean class="org.eclipse.jetty.server.HttpConnectionFactory">
+                                <constructor-arg ref="httpConfig"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean id="connector2" class="org.eclipse.jetty.server.ServerConnector">
+                    <constructor-arg ref="server"/>
+                    <constructor-arg ref="sslContextFactory"/>
+                    <constructor-arg>
+                        <bean class="org.eclipse.jetty.server.HttpConnectionFactory">
+                            <constructor-arg ref="sslHttpConfig"/>
+                        </bean>
+                    </constructor-arg>
+                    <property name="host" value="0.0.0.0"/>
+                    <property name="port" value="8091"/>
+                    <property name="idleTimeout" value="30000"/>
+                </bean>
+            </list>
+        </property>
+
+        <property name="handler">
+            <bean class="org.eclipse.jetty.server.handler.HandlerCollection">
+                <property name="handlers">
+                    <list>
+                        <bean id="contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
+                            <property name="handlers">
+                                <list>
+                                    <bean class="org.eclipse.jetty.servlet.ServletContextHandler">
+                                        <property name="contextPath" value="/"/>
+                                        <property name="resourceBase" value="."/>
+                                        <property name="servletHandler">
+                                            <bean class="org.eclipse.jetty.servlet.ServletHandler">
+                                                <property name="servlets">
+                                                    <list>
+                                                        <bean class="org.eclipse.jetty.servlet.ServletHolder">
+                                                            <property name="name" value="yourwebm"/>
+                                                            <property name="className"
+                                                                      value="org.springframework.web.servlet.DispatcherServlet"/>
+                                                            <property name="initOrder" value="1"/>
+
+                                                            <property name="initParameters">
+                                                                <map>
+                                                                    <entry key="contextConfigLocation"
+                                                                           value="file:src/main/webapp/WEB-INF/servlet-config.xml"/>
+                                                                </map>
+                                                            </property>
+                                                        </bean>
+                                                    </list>
+                                                </property>
+                                                <property name="servletMappings">
+                                                    <list>
+                                                        <bean class="org.eclipse.jetty.servlet.ServletMapping">
+                                                            <property name="servletName" value="yourwebm"/>
+                                                            <property name="pathSpecs">
+                                                                <list>
+                                                                    <value>/</value>
+                                                                </list>
+                                                            </property>
+                                                        </bean>
+                                                    </list>
+                                                </property>
+                                            </bean>
+                                        </property>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+                        <bean id="defaultHandler" class="org.eclipse.jetty.server.handler.DefaultHandler"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+</beans>
