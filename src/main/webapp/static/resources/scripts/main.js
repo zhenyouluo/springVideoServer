@@ -61,7 +61,7 @@ $(function () {
         } else {
             if ($btnPlayActive.parent().closest('.video-col').prev().hasClass('video-col')) {
                 $videoSrc.attr('src', prevVidSrc);
-                $btnPlayActive.removeClass('btn-play-ative');
+                $btnPlayActive.removeClass('btn-play-active');
                 $btnPlayPrev.addClass('btn-play-active');
             } else {
                 console.log('last');

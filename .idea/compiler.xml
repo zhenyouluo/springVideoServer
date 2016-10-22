@@ -25,8 +25,8 @@
         <module name="spring-hibernate-mysql" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.6">
-      <module name="spring-hibernate-mysql" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="spring-hibernate-mysql" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

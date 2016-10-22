@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FileScanner {
 
-    private static String dir = "D:/";
+    private static String dir = "/tmp";
 
     private WebmService webmService;
 

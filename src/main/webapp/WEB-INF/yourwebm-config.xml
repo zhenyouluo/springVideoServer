@@ -14,7 +14,7 @@
     <bean id="userRepository" class="com.khudim.users.UserRepository"/>
     <bean id="webmService" class="com.khudim.webm.WebmService"/>
     <bean id="webmRepository" class="com.khudim.webm.WebmRepository"/>
-    <bean id="fileScanner" class="com.khudim.scanner.FileScanner">
+    <bean id="fileScanner" class="com.khudim.scanner.FileScanner" init-method="addWebmToBase">
         <constructor-arg name="webmService" ref="webmService"/>
             </bean>
 </beans>

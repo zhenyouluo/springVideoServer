@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2020734801">
-    <data-source source="LOCAL" name="MySQL - yourwebm@localhost" uuid="92cfd07c-0730-45e3-b2bf-791531c1d234">
-      <driver-ref>mysql</driver-ref>
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="H2 - webm" uuid="e2f5a5f3-3933-4953-96ed-11cced70c75b">
+      <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/yourwebm</jdbc-url>
-      <vm-options>max_allowed_packet</vm-options>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:file:D:/webm;DB_CLOSE_DELAY=-1;create=true;AUTO_SERVER=TRUE</jdbc-url>
       <driver-properties>
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-        <property name="maxAllowedPacket" value="161616" />
+        <property name="sa" value="" />
       </driver-properties>
-      <libraries />
     </data-source>
   </component>
 </project>
