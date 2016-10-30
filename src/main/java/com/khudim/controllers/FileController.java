@@ -46,21 +46,19 @@ public class FileController {
             name = multipartFile.getOriginalFilename();
             Webm webm = new Webm();
             webm.setDate(System.currentTimeMillis());
-            try {
+
+
+            String rootPath = "\\src\\main\\webapp\\resources";
+            java.io.File dir = new java.io.File(rootPath + java.io.File.separator + "webmFiles");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            java.io.File loadFile = new java.io.File(dir.getAbsolutePath() + java.io.File.separator + name);
+            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile))) {
                 byte[] bytes = multipartFile.getBytes();
-                String rootPath = "D:\\JavaProjects\\spring-hibernate-mysql\\src\\main\\webapp\\resources";
-                java.io.File dir = new java.io.File(rootPath + java.io.File.separator + "webmFiles");
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                java.io.File loadFile = new java.io.File(dir.getAbsolutePath() + java.io.File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile));
                 stream.write(bytes);
-                stream.flush();
-                stream.close();
                 webm.setPath(loadFile.getAbsolutePath());
                 webm.setName(name);
-                webm.setImage(multipartFile.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -12,7 +12,9 @@ import java.util.Arrays;
         @NamedQuery(name = "Webm.findAll",
                 query = "SELECT webm FROM Webm webm"),
         @NamedQuery(name = "Webm.findByName",
-                query = "SELECT webm FROM Webm webm WHERE webm.name = :name ")
+                query = "SELECT webm FROM Webm webm WHERE webm.name = :name "),
+        @NamedQuery(name = "Webm.findByPath",
+                query = "SELECT webm FROM Webm webm WHERE webm.path = :path ")
 })
 @Table(name = "webm")
 public class Webm {
@@ -28,7 +30,6 @@ public class Webm {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -37,7 +38,7 @@ public class Webm {
         this.id = id;
     }
 
-    @Basic
+
     @Column(name = "name", length = 200)
     public String getName() {
         return name;
@@ -47,7 +48,7 @@ public class Webm {
         this.name = name;
     }
 
-    @Basic
+
     @Column(name = "date", nullable = false)
     public long getDate() {
         return date;
@@ -57,7 +58,7 @@ public class Webm {
         this.date = date;
     }
 
-    @Basic
+
     @Column(name = "image")
     public byte[] getImage() {
         return image;
@@ -67,7 +68,7 @@ public class Webm {
         this.image = image;
     }
 
-    @Basic
+
     @Column(name = "rating")
     public int getRating() {
         return rating;
@@ -77,7 +78,7 @@ public class Webm {
         this.rating = rating;
     }
 
-    @Basic
+
     @Column(name = "vote_count")
     public long getVoteCount() {
         return voteCount;
@@ -87,7 +88,7 @@ public class Webm {
         this.voteCount = voteCount;
     }
 
-    @Basic
+
     @Column(name = "width")
     public int getWidth() {
         return width;
@@ -97,7 +98,7 @@ public class Webm {
         this.width = width;
     }
 
-    @Basic
+
     @Column(name = "height")
     public int getHeight() {
         return height;
@@ -107,8 +108,8 @@ public class Webm {
         this.height = height;
     }
 
-    @Basic
-    @Column(name = "path", length = 200)
+
+    @Column(name = "path", unique = true)
     public String getPath() {
         return path;
     }

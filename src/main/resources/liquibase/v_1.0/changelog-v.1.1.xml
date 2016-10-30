@@ -9,13 +9,13 @@
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="NAME" type="VARCHAR(255)">
+            <column name="NAME" type="VARCHAR">
                 <constraints nullable="false"/>
             </column>
             <column name="DATE" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="IMAGE" type="BYTEA">
+            <column name="IMAGE" type="BLOB">
                 <constraints nullable="true"/>
             </column>
             <column name="rating" type="INT">
@@ -30,7 +30,7 @@
             <column name="HEIGHT" type="INT">
                 <constraints nullable="true"/>
             </column>
-            <column name="PATH" type="VARCHAR(255)">
+            <column name="PATH" type="VARCHAR">
                 <constraints nullable="false"/>
             </column>
         </createTable>

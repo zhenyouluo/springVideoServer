@@ -31,21 +31,23 @@
         <div class="row">
             <th:block th:each="webm : ${webms}" var="webms">
                 <div class="col-md-3 col-sm-4 col-xs-12 video-col">
+                    <div th:with="url = @{/video/{webmPath}(webmPath=${webm.path})}">
                     <div class="thumbnail">
-                        <img th:href="${picture_url}" alt="">
+                        <img th:src="@{/img/{webmPath}(webmPath=${webm.path})}" alt="" src="">
                         <div class="caption">
                             <h3></h3>
                             <p>Ipsum dignissimos minus cumquedistinctio sit? Dolore adipisci cum veniam?</p>
-                            <p><a data-vedio-source=${th:text="@{/video/{webmName}(webmName=${webm.name})}"  class="btn btn-primary btn-play"
+                            <p><a data-vedio-source="${url}"  class="btn btn-primary btn-play"
                                   role="button">
                                 <span
                                         class="glyphicon glyphicon-play" aria-hidden="true">
                                 </span>
                             </a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                            <video width="320" height="240" controls preload="none">
-                                <source th:src="@{/video/{webmName}(webmName=${webm.name})}" type="video/webm">
+                            <video width="320" height="240" controls="controls" preload="none" >
+                                <source th:src="@{/video/{webmPath}(webmPath=${webm.path})}" type="video/webm">
                             </video>
                             </div>
+                        </div>
                         </div>
                     </div>
             </th:block>

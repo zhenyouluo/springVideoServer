@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.nio.file.Path;
@@ -22,7 +23,7 @@ public class WebmRepository {
     }
 
     public List<Webm> getAllWebm() {
-        return entityManager.createNamedQuery("Webm.findAll",Webm.class).getResultList();
+        return entityManager.createNamedQuery("Webm.findAll", Webm.class).getResultList();
     }
 
     public void addWebm(Webm webm) {
@@ -33,9 +34,13 @@ public class WebmRepository {
         return null;
     }
 
-    public Webm getWebmPath(String name) {
-       TypedQuery<Webm> query = entityManager.createNamedQuery("Webm.findByName",Webm.class).setFirstResult(0);
-        query.setParameter("name",name);
-        return query.getSingleResult();
+    public Webm getWebmPath(String path) {
+        try {
+            return entityManager.createNamedQuery("Webm.findByPath", Webm.class)
+                    .setParameter("path", path)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
