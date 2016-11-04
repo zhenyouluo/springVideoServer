@@ -30,11 +30,17 @@ public class WebmRepository {
         entityManager.merge(webm);
     }
 
-    public Webm getWebm(int id) {
-        return null;
+    public Webm getWebmById(long id) {
+        try {
+            return entityManager.createNamedQuery("Webm.findById", Webm.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
-    public Webm getWebmPath(String path) {
+    public Webm getWebmByPath(String path) {
         try {
             return entityManager.createNamedQuery("Webm.findByPath", Webm.class)
                     .setParameter("path", path)

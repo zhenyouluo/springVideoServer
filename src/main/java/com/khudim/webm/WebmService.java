@@ -28,23 +28,29 @@ public class WebmService {
         repository.addWebm(webm);
     }
 
-    public Path getWebmPath(String path) {
-        Webm webm = repository.getWebmPath(path);
+    public Path getWebmPathById(String id) {
+        long webmId = Long.parseLong(id);
+        Webm webm = repository.getWebmById(webmId);
         if(webm!=null) {
             return Paths.get(webm.getPath());
         }
         return null;
     }
 
-    public Webm get(int id) {
-        return repository.getWebm(id);
-    }
-
-    public byte[] getImage(String webmPath) {
-        Webm webm = repository.getWebmPath(webmPath);
+    public byte[] getImage(String id) {
+        long webmId = Long.parseLong(id);
+        Webm webm = repository.getWebmById(webmId);
         if(webm!=null){
             return webm.getImage();
         }
         return new byte[0];
+    }
+
+    public Object getWebmPathByPath(String path) {
+        Webm webm = repository.getWebmByPath(path);
+        if(webm!=null) {
+            return Paths.get(webm.getPath());
+        }
+        return null;
     }
 }

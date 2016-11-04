@@ -2,20 +2,15 @@ package com.khudim.scanner;
 
 import com.khudim.webm.Webm;
 import com.khudim.webm.WebmService;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Beaver.
@@ -32,7 +27,7 @@ public class FileScanner {
         Webm webm;
         int i = 1;
         for (Path path : paths) {
-            if (webmService.getWebmPath(path.toString()) == null) {
+            if (webmService.getWebmPathByPath(path.toString()) == null) {
                 int[] videoSize = findVideoSize(path.toString());
                 byte[] image = getImageFromVideo(path);
                 webm = new Webm();

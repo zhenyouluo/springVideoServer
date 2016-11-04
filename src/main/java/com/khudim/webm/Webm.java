@@ -13,6 +13,8 @@ import java.util.Arrays;
                 query = "SELECT webm FROM Webm webm"),
         @NamedQuery(name = "Webm.findByName",
                 query = "SELECT webm FROM Webm webm WHERE webm.name = :name "),
+        @NamedQuery(name = "Webm.findById",
+                query = "SELECT webm FROM Webm webm WHERE webm.id = :id "),
         @NamedQuery(name = "Webm.findByPath",
                 query = "SELECT webm FROM Webm webm WHERE webm.path = :path ")
 })
